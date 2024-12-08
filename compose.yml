@@ -1,0 +1,11 @@
+services:
+  zipkin:
+    image: "ghcr.io/openzipkin/zipkin:latest"
+    ports:
+      - "9411:9411"
+  otel-collector:
+    image: "otel/opentelemetry-collector-contrib:0.91.0"
+    ports:
+      - "4317:4317"
+    volumes:
+      - "./local.otel-config.yml:/etc/otelcol-contrib/config.yaml"
