@@ -55,7 +55,10 @@ func Setup(ctx context.Context) (*sdktrace.TracerProvider, func(), error) {
 func NewHTTPTransport(tp *sdktrace.TracerProvider) http.RoundTripper {
 	return otelhttp.NewTransport(
 		http.DefaultTransport,
-		otelhttp.WithClientTrace(HTTPClientTracer),
+		// Default HTTPClientTracer
+		// otelhttp.WithClientTrace(HTTPClientTracer),
+		// Custom HTTPClientTracer
+		otelhttp.WithClientTrace(HTTPConnTracer(tp)),
 	)
 }
 
